@@ -29,7 +29,7 @@ class arduinocom {
                     baudRate: 9600,
                     parser: new sp.parsers.Readline("\r\n"),
                 });
-                this.ports[i].on("open", () => {});
+                this.ports[i].on("open", () => { });
             } else {
                 this.ports[i] = -1;
             }
@@ -51,6 +51,11 @@ class arduinocom {
         var i, j;
         // For each module...
         for (j = 0; j < 4; j++) {
+
+            // If port is not connected then skip
+            this.logPorts();
+            if (this.ports[j] == -1) continue;
+
             var modulesetting = 0;
             var radiosetting = document.getElementsByName("mod" + j);
             // Find radio button that is checked
@@ -58,14 +63,22 @@ class arduinocom {
                 if (radiosetting[i].checked) modulesetting = i;
             }
 
-            // Temporary for e = OFF, s = ON. On a connected Arduino
-            if (j == 0) {
-                if (modulesetting == 1) {
-                    this.ports[0].write("e");
-                }
-                if (modulesetting == 2) {
-                    this.ports[0].write("s");
-                }
+            switch (modulesetting){
+                case 0:
+                    this.ports[j].write("q");
+                    break;
+                case 1:
+                    this.ports[j].write("w");
+                    break;
+                case 2:
+                    this.ports[j].write("e");
+                    break;
+                // case 3:
+                //     this.ports[j].write("r");
+                //     break;
+                // case 4:
+                //     this.ports[j].write("t");
+                //     break;
             }
         }
     }

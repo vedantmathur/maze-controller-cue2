@@ -1,3 +1,6 @@
+// #include <Adafruit_CircuitPlayground.h>
+// #include <Adafruit_Circuit_Playground.h>
+
 // Insight Maze - NeoPixel ring lights
 
 #include <Adafruit_NeoPixel.h>
@@ -20,7 +23,7 @@ int LED_PIN = 0;
 
 Adafruit_NeoPixel strip[3];
 int incomingByte;
-bool FFLAG = false;
+bool FFLAG = true;
 
 // Argument 1 = Number of pixels in NeoPixel strip
 // Argument 2 = Arduino pin number (most are valid)
